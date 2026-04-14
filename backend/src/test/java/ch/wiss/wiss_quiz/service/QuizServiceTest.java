@@ -287,6 +287,34 @@ class QuizServiceTest {
         assertEquals(2, result);
     }
 
+    // Station 5 – Bewertungsstufen (Score Rating)
+    @Test
+    void getScoreRating_returnsNichtBestanden_whenPercentBelow60() {
+        assertEquals("Nicht bestanden", service.getScoreRating(0.0));
+        assertEquals("Nicht bestanden", service.getScoreRating(59.9));
+    }
+
+    // Station 5 – Bewertungsstufen (Score Rating)
+    @Test
+    void getScoreRating_returnsAusreichend_whenPercentBetween60And74() {
+        assertEquals("Ausreichend", service.getScoreRating(60.0));
+        assertEquals("Ausreichend", service.getScoreRating(74.9));
+    }
+
+    // Station 5 – Bewertungsstufen (Score Rating)
+    @Test
+    void getScoreRating_returnsGut_whenPercentBetween75And89() {
+        assertEquals("Gut", service.getScoreRating(75.0));
+        assertEquals("Gut", service.getScoreRating(89.9));
+    }
+
+    // Station 5 – Bewertungsstufen (Score Rating)
+    @Test
+    void getScoreRating_returnsSehrGut_whenPercentIs90OrAbove() {
+        assertEquals("Sehr gut", service.getScoreRating(90.0));
+        assertEquals("Sehr gut", service.getScoreRating(100.0));
+    }
+
     private List<Answer> createValidAnswers() {
         return List.of(
                 createAnswer("A", true),

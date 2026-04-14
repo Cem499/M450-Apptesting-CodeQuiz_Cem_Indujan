@@ -56,6 +56,14 @@ public class QuizService {
         return percent >= 60;
     }
 
+    // Gibt eine textuelle Bewertung basierend auf dem Prozentsatz zurück
+    public String getScoreRating(double percent) {
+        if (percent >= 90) return "Sehr gut";
+        if (percent >= 75) return "Gut";
+        if (percent >= 60) return "Ausreichend";
+        return "Nicht bestanden";
+    }
+
     public List<Question> getQuizQuestionsByCategoryId(Integer catId) {
         Category cat = categoryRepository.findById(catId).orElseThrow();
 
