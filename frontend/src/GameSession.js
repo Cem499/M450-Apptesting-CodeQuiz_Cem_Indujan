@@ -98,6 +98,14 @@ class GameSession extends React.Component {
     });
   }
 
+  // Gibt eine Bewertungsstufe basierend auf dem Prozentsatz zurück
+  getScoreRating(percent) {
+    if (percent >= 90) return "Sehr gut";
+    if (percent >= 75) return "Gut";
+    if (percent >= 60) return "Ausreichend";
+    return "Nicht bestanden";
+  }
+
   render() {
     let feedback = "";
     if (this.state.correct !== null) {
@@ -128,10 +136,15 @@ class GameSession extends React.Component {
         </div>
       );
     } else {
+      const maxScore = this.state.questions.length * 100;
+      const percent = maxScore > 0 ? (this.state.score / maxScore) * 100 : 0;
+      const rating = this.getScoreRating(percent);
+
       q = (
         <div data-testid="quiz-finished">
           <h1>Congrats, you made it!</h1>
           <h2>No more questions</h2>
+          <p data-testid="score-rating">Bewertung: {rating}</p>
         </div>
       );
     }
